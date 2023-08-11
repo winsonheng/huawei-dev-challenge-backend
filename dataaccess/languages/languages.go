@@ -11,3 +11,11 @@ func Create(language *models.Language) (*models.Language, error) {
 	}
 	return language, nil
 }
+
+func List() ([]models.Language, error) {
+	var langauges []models.Language
+	if err := database.Database.Find(&langauges).Error; err != nil {
+		return nil, err
+	}
+	return langauges, nil
+}

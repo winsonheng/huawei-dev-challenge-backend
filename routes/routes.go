@@ -20,6 +20,6 @@ func getAuthRoutes(r *gin.Engine) {
 
 func getLanguageRoutes(r *gin.Engine) {
 	languageRoutes := r.Group("/languages")
-	// languageRoutes.GET()
+	languageRoutes.GET("", language.HandleList)
 	languageRoutes.POST("", language.HandleCreate)
 }

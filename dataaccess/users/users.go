@@ -12,3 +12,12 @@ func Create(user *models.User) (*models.User, error) {
 	}
 	return user, nil
 }
+
+func FindUserByUsername(username string) (*models.User, error) {
+    var user *models.User
+    err := database.Database.Where("username=?", username).Find(&user).Error
+    if err != nil {
+        return nil, err
+    }
+    return user, nil
+}

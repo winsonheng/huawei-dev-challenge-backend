@@ -23,3 +23,7 @@ func (user *User) BeforeSave(*gorm.DB) error {
     user.Username = html.EscapeString(strings.TrimSpace(user.Username))
     return nil
 }
+
+func (user *User) ValidatePassword(password string) error {
+    return bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+}

@@ -11,3 +11,11 @@ func Create(client *models.Client) (*models.Client, error) {
 	}
 	return client, nil
 }
+
+func List() ([]models.Client, error) {
+	var clients []models.Client
+	if err := database.Database.Find(&clients).Error; err != nil {
+		return nil, err
+	}
+	return clients, nil
+}

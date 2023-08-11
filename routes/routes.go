@@ -28,6 +28,6 @@ func getLanguageRoutes(r *gin.Engine) {
 
 func getClientRoutes(r *gin.Engine) {
 	clientRoutes := r.Group("/clients")
-	// clientRoutes.GET("", language.HandleList)
+	clientRoutes.GET("", client.HandleList)
 	clientRoutes.POST("", client.HandleCreate)
 }

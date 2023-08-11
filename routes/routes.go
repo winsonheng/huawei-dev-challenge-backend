@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"backend/handlers/client"
 	"backend/handlers/language"
 	"backend/handlers/user"
 
@@ -10,6 +11,7 @@ import (
 func GetRoutes(r *gin.Engine) {
 	getAuthRoutes(r)
 	getLanguageRoutes(r)
+	getClientRoutes(r)
 }
 
 func getAuthRoutes(r *gin.Engine) {
@@ -22,4 +24,10 @@ func getLanguageRoutes(r *gin.Engine) {
 	languageRoutes := r.Group("/languages")
 	languageRoutes.GET("", language.HandleList)
 	languageRoutes.POST("", language.HandleCreate)
+}
+
+func getClientRoutes(r *gin.Engine) {
+	clientRoutes := r.Group("/clients")
+	// clientRoutes.GET("", language.HandleList)
+	clientRoutes.POST("", client.HandleCreate)
 }

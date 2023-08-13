@@ -3,6 +3,7 @@ package client
 import (
 	"backend/dataaccess/clients"
 	"backend/params/client"
+	"backend/views/clientviews"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -25,5 +26,7 @@ func HandleCreate(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"client": client})
+	clientView := clientviews.ViewFrom(client)
+
+	context.JSON(http.StatusOK, gin.H{"client": clientView})
 }

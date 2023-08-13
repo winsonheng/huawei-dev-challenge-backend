@@ -2,6 +2,7 @@ package client
 
 import (
 	"backend/dataaccess/clients"
+	"backend/views/clientviews"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -14,6 +15,8 @@ func HandleList(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
+	clientViews := clientviews.ViewsFromArray(clients)
 	
-	context.JSON(http.StatusOK, gin.H{"clients": clients})
+	context.JSON(http.StatusOK, gin.H{"clients": clientViews})
 }

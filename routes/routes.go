@@ -36,5 +36,6 @@ func getClientRoutes(r *gin.Engine) {
 
 func getTranslationRoutes(r *gin.Engine) {
 	translationRoutes := r.Group("/translations")
+	translationRoutes.GET("", translation.HandleQuery)
 	translationRoutes.POST("", translation.HandleCreate)
 }

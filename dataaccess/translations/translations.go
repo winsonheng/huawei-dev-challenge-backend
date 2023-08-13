@@ -3,6 +3,7 @@ package translations
 import (
 	"backend/database"
 	"backend/models"
+	"errors"
 
 	"gorm.io/gorm"
 )
@@ -86,4 +87,31 @@ func Create(SourceText *models.Text, TranslatedText *models.Text, ClientID uint)
 	}
 	
 	return translation, nil
+}
+
+func Query(SourceLanguageID int64, TargetLanguageID int64, ClientID int64, text string) (*models.Text, error) {
+	var translatedText *models.Text
+	// search for translations belonging to the client
+	res := database.Database.Model(&models.Text{}).
+		Joins("left join translations on translations.target_text_id = texts.id").
+		Joins("left join texts as source_texts on source_texts.id = translations.source_text_id").
+		Where("source_texts.content = ?", text).
+		Where("translations.client_id = ?", ClientID).
+		First(&translatedText)
+	if res.Error == nil {
+		return translatedText, nil
+	}
+
+	// search for translations from whole pool
+	res = database.Database.Model(&models.Text{}).
+		Joins("left join translations on translations.target_text_id = texts.id").
+		Joins("left join texts as source_texts on source_texts.id = translations.source_text_id").
+		Where("source_texts.content = ?", text).
+		First(&translatedText)
+	if res.Error == nil {
+		return translatedText, nil 
+	}
+
+	// TODO: fall back on some translation service
+	return nil, errors.New("no translation found")
 }

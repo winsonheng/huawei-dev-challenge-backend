@@ -13,6 +13,7 @@ func HandleCreate(context *gin.Context) {
 
 	if err := context.ShouldBindJSON(&createParams); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 
 	sourceText, translatedText, clientID := translation.ToModel(&createParams)

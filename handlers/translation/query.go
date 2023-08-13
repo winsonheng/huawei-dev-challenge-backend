@@ -2,6 +2,7 @@ package translation
 
 import (
 	"backend/dataaccess/translations"
+	"backend/views/textviews"
 	"net/http"
 	"strconv"
 	"strings"
@@ -36,5 +37,8 @@ func HandleQuery(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	context.JSON(http.StatusOK, gin.H{"translation": translation})
+
+	translationView := textviews.ViewFrom(translation)
+
+	context.JSON(http.StatusOK, gin.H{"translation": translationView})
 }

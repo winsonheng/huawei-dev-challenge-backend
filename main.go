@@ -4,6 +4,7 @@ import (
 	"backend/database"
 	"backend/models"
 	"backend/routes"
+	"backend/seed"
 	"fmt"
 	"log"
 
@@ -14,6 +15,7 @@ import (
 func main() {
     loadEnv()
     loadDatabase()
+	seed.SeedDB()
 	serveApplication()
 }
 

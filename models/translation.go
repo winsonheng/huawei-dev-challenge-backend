@@ -9,8 +9,11 @@ import (
 type Translation struct {
 	gorm.Model
 	SourceTextID uint `gorm:"foreignKey; not null"`
+	SourceText Text
 	TargetTextID uint `gorm:"foreignKey; not null"`
+	TargetText Text
 	ClientID uint `gorm:"foreignKey; not null"`
+	Client Client
 }
 
 func (translation *Translation) ValidateEntryIsUnique(db *gorm.DB) error {

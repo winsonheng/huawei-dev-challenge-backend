@@ -10,6 +10,10 @@ backend for translate app
 1. run ```createdb -h <DB_HOSTNAME> -p <DB_PORT> -U <DB_USER> diary_app --password```
 2. create a .env.local file and copy contents of .env over. Replace fields accordingly
 
+# Starting the server
+1. run ```go mod download``` to get all dependencies
+2. run ```go run main.go``` to start the server
+
 # API spec
 ```/languages```
 

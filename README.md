@@ -2,6 +2,7 @@
 backend for translate app
 
 # Tech stack
+- Golang: see https://go.dev/
 - Gin framework: see https://gin-gonic.com/ 
 - postgres DB: see https://www.postgresql.org/
 
@@ -18,6 +19,7 @@ Response:
 {
   "id": uint,
   "name": string,
+  "code": string
 }
 ```
 
@@ -25,7 +27,8 @@ Response:
 Request:
 ```
 {
-  "name": string
+  "name": string,
+  "code": string
 }
 ```
 Response:

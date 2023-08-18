@@ -8,7 +8,6 @@ import (
 	"backend/views/textviews"
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"os"
 	"strconv"

@@ -19,3 +19,11 @@ func List() ([]models.Language, error) {
 	}
 	return langauges, nil
 }
+
+func GetLanguageFromID(id int64) (*models.Language, error) {
+	var langauge *models.Language
+	if err := database.Database.Find(&langauge, id).Error; err != nil {
+		return nil, err
+	}
+	return langauge, nil
+}

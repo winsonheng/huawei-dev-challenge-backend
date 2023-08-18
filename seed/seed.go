@@ -19,8 +19,8 @@ func SeedDB() {
 }
 
 func seedLanguages(db *gorm.DB) {
-	languages.Create(&models.Language{Name: "english"})
-	languages.Create(&models.Language{Name: "spanish"})
+	languages.Create(&models.Language{Name: "english", Code: "en"})
+	languages.Create(&models.Language{Name: "spanish", Code: "es"})
 }
 
 func seedClients(db *gorm.DB) {

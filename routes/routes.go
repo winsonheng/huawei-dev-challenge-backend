@@ -46,7 +46,7 @@ func getTranslationRoutes(r *gin.Engine) {
 }
 
 func getTextRoutes(r *gin.Engine) {
-	textRoutes := r.Group("/translations")
+	textRoutes := r.Group("/texts")
 	textRoutes.POST("", text.HandleCreate)
 	textRoutes.GET("/by_client", text.HandleList)
 }

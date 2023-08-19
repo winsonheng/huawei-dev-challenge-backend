@@ -22,6 +22,7 @@ func main() {
 func loadDatabase() {
     database.Connect()
     database.Database.AutoMigrate(&models.Client{})
+	database.Database.AutoMigrate(&models.ClientText{})
 	database.Database.AutoMigrate(&models.Language{})
 	database.Database.AutoMigrate(&models.Text{})
 	database.Database.AutoMigrate(&models.Translation{})

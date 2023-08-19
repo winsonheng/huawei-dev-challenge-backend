@@ -14,7 +14,7 @@ func List(ClientID int64, LanguageID int64) ([]models.Text, error) {
 		Joins("left join client_texts on client_texts.text_id = texts.id").
 		Where("texts.language_id = ?", LanguageID).
 		Where("client_texts.client_id = ?", ClientID).
-		Find(texts).Error; err != nil {
+		Find(&texts).Error; err != nil {
 		return nil, err
 	}
 

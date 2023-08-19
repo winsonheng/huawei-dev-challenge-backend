@@ -1,6 +1,8 @@
 package text
 
-import "backend/models"
+import (
+	"backend/models"
+)
 
 type CreateParams struct {
 	Content    string `json:"content"`

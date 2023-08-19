@@ -96,14 +96,14 @@ func Create(SourceText *models.Text, TranslatedText *models.Text, ClientID uint)
 		}
 
 		var targetClientText *models.ClientText
-		res = tx.Model(&models.ClientText{}).Where("client_id = ?", ClientID).Where("text_id = ?", SourceText.ID).Find(&targetClientText)
+		res = tx.Model(&models.ClientText{}).Where("client_id = ?", ClientID).Where("text_id = ?", TranslatedText.ID).Find(&targetClientText)
 		if res.Error != nil {
 			return res.Error
 		}
 		if res.RowsAffected == 0 {
 			targetClientText = &models.ClientText{
 				ClientID: ClientID,
-				TextID: SourceText.ID,
+				TextID: TranslatedText.ID,
 			}
 			if err := tx.Create(&targetClientText).Error; err != nil {
 				return err

@@ -3,6 +3,7 @@ package routes
 import (
 	"backend/handlers/client"
 	"backend/handlers/language"
+	"backend/handlers/text"
 	"backend/handlers/translation"
 	"backend/handlers/user"
 
@@ -14,6 +15,7 @@ func GetRoutes(r *gin.Engine) {
 	getLanguageRoutes(r)
 	getClientRoutes(r)
 	getTranslationRoutes(r)
+	getTextRoutes(r)
 }
 
 func getAuthRoutes(r *gin.Engine) {
@@ -41,4 +43,9 @@ func getTranslationRoutes(r *gin.Engine) {
 	// translationRoutes.Use(middleware.JWTAuthMiddleware())
 	translationRoutes.GET("", translation.HandleQuery)
 	translationRoutes.POST("", translation.HandleCreate)
+}
+
+func getTextRoutes(r *gin.Engine) {
+	textRoutes := r.Group("/translations")
+	textRoutes.GET("/by_client", text.HandleList)
 }

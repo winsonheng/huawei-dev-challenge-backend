@@ -15,3 +15,11 @@ func ViewFrom(text *models.Text) View {
 		LangaugeID: text.LanguageID,
 	}
 }
+
+func ViewsFromArray(texts []models.Text) []View {
+	views := make([]View, len(texts))
+	for i, text := range texts {
+		views[i] = ViewFrom(&text)
+	}
+	return views
+}

@@ -23,3 +23,15 @@ func ViewsFromArray(texts []models.Text) []View {
 	}
 	return views
 }
+
+func ViewsFromPointerArray(texts []*models.Text) []*View {
+	views := make([]*View, len(texts))
+	for i, text := range texts {
+		if text == nil {
+			continue
+		}
+		view := ViewFrom(text)
+		views[i] = &view
+	}
+	return views
+}

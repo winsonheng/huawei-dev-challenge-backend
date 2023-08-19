@@ -43,6 +43,7 @@ func getTranslationRoutes(r *gin.Engine) {
 	// translationRoutes.Use(middleware.JWTAuthMiddleware())
 	translationRoutes.GET("", translation.HandleQuery)
 	translationRoutes.POST("", translation.HandleCreate)
+	translationRoutes.POST("/multiple", translation.HandleMultipleQuery)
 }
 
 func getTextRoutes(r *gin.Engine) {

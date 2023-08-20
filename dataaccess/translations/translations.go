@@ -146,3 +146,19 @@ func Query(SourceLanguageID int64, TargetLanguageID int64, ClientID int64, text 
 	// TODO: fall back on some translation service
 	return nil, errors.New("no translation found")
 }
+
+func ListByClient(ClientID uint, TargetLanguageID uint) ([]models.Translation, error) {
+	var translations []models.Translation
+	err := database.Database.
+		Preload("SourceText").
+		Preload("TargetText").
+		Joins("join texts as source_texts on source_texts.id = translations.source_text_id").
+		Joins("join texts as target_texts on target_texts.id = translations.target_text_id").
+		Where("client_id = ?", ClientID).
+		Where("target_texts.language_id = ?", TargetLanguageID).
+		Find(&translations).Error
+	if err != nil {
+		return nil, err
+	}
+	return translations, nil
+}

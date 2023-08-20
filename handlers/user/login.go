@@ -37,5 +37,6 @@ func Login(context *gin.Context) {
 		return
 	}
 
+	context.Header("Access-Control-Allow-Origin", "*")
 	context.JSON(http.StatusOK, gin.H{"jwt": jwt})
 }

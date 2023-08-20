@@ -29,5 +29,6 @@ func Register(context *gin.Context) {
 		return
 	}
 
+	context.Header("Access-Control-Allow-Origin", "*")
 	context.JSON(http.StatusCreated, gin.H{"user": savedUser})
 }

@@ -28,5 +28,6 @@ func HandleCreate(context *gin.Context) {
 
 	textView := textviews.ViewFrom(text)
 
+	context.Header("Access-Control-Allow-Origin", "*")
 	context.JSON(http.StatusCreated, gin.H{"text": textView})
 }

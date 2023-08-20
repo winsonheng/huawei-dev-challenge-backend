@@ -53,6 +53,7 @@ func HandleQuery(context *gin.Context) {
 
 	translationView := textviews.ViewFrom(translation)
 
+	context.Header("Access-Control-Allow-Origin", "*")
 	context.JSON(http.StatusOK, gin.H{"translation": translationView})
 }
 

@@ -33,5 +33,6 @@ func HandleMultipleQuery(context *gin.Context) {
 
 	translationViews := textviews.ViewsFromPointerArray(translationsList)
 
+	context.Header("Access-Control-Allow-Origin", "*")
 	context.JSON(http.StatusCreated, gin.H{"translations": translationViews})
 }

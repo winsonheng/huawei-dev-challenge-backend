@@ -28,5 +28,6 @@ func HandleCreate(context *gin.Context) {
 
 	clientView := clientviews.ViewFrom(client)
 
+	context.Header("Access-Control-Allow-Origin", "*")
 	context.JSON(http.StatusOK, gin.H{"client": clientView})
 }

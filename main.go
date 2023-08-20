@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -40,6 +41,10 @@ func serveApplication() {
     router := gin.Default()
 
     routes.GetRoutes(router)
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000", "https://huawei-dev-challenge.web.app"}
+	router.Use(cors.New(config))
 
     router.Run(":8000")
     fmt.Println("Server running on port 8000")

@@ -18,5 +18,6 @@ func HandleList(context *gin.Context) {
 
 	languageViews := languageviews.ViewsFromArray(languages)
 	
+	context.Header("Access-Control-Allow-Origin", "*")
 	context.JSON(http.StatusOK, gin.H{"language": languageViews})
 }

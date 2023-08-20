@@ -32,5 +32,6 @@ func HandleCreate(context *gin.Context) {
 		translationList[i] = translation
 	}
 
+	context.Header("Access-Control-Allow-Origin", "*")
 	context.JSON(http.StatusCreated, gin.H{"translations": translationList})
 }

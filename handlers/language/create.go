@@ -28,5 +28,6 @@ func HandleCreate(context *gin.Context) {
 
 	view := languageviews.ViewFrom(language)
 
+	context.Header("Access-Control-Allow-Origin", "*")
 	context.JSON(http.StatusOK, gin.H{"language": view})
 }

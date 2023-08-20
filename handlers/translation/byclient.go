@@ -24,5 +24,6 @@ func HandleListByClient(context *gin.Context) {
 
 	views := translationviews.ViewsFromArray(translationList)
 	
+	context.Header("Access-Control-Allow-Origin", "*")
 	context.JSON(http.StatusCreated, gin.H{"translations": views})
 }

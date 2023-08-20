@@ -44,7 +44,7 @@ func getTranslationRoutes(r *gin.Engine) {
 	translationRoutes.GET("", translation.HandleQuery)
 	translationRoutes.POST("", translation.HandleCreate)
 	translationRoutes.POST("/multiple", translation.HandleMultipleQuery)
-	translationRoutes.GET("/by_client", translation.HandleListByClient)
+	translationRoutes.POST("/by_client", translation.HandleListByClient)
 }
 
 func getTextRoutes(r *gin.Engine) {

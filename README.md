@@ -79,11 +79,15 @@ Response:
 Request:
 ```
 {
-  "sourceLanguageID": uint,
-  "text": string,
-  "targetLanguageID": uint,
-  "translation": string,
-  "clientID": uint
+  "translations": [
+    {
+      "sourceLanguageID": uint,
+      "text": string,
+      "targetLanguageID": uint,
+      "translation": string,
+      "clientID": uint
+    }, ...
+  ]
 }
 ```
 Response:
@@ -109,6 +113,28 @@ Response:
       "content": string,
       "languageID": uint
     } ...
+  ]
+}
+```
+
+```POST```
+```translations/by_client```
+Request:
+```
+{
+  "clientID": uint,
+  "targetLanguageID": uint
+}
+```
+Response:
+```
+{
+  translations: [
+    {
+      "id": uint,
+      "sourceText": string,
+      "targetText": string
+    },...
   ]
 }
 ```

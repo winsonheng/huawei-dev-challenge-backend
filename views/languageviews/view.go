@@ -1,4 +1,4 @@
-package languageViews
+package languageviews
 
 import "backend/models"
 

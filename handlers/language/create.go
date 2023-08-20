@@ -3,7 +3,7 @@ package language
 import (
 	"backend/dataaccess/languages"
 	"backend/params/language"
-	"backend/views/languageViews"
+	"backend/views/languageviews"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,7 +26,7 @@ func HandleCreate(context *gin.Context) {
 		return
 	}
 
-	view := languageViews.ViewFrom(language)
+	view := languageviews.ViewFrom(language)
 
 	context.JSON(http.StatusOK, gin.H{"language": view})
 }

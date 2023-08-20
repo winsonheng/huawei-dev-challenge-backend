@@ -14,15 +14,15 @@ import (
 )
 
 func main() {
-    loadEnv()
-    loadDatabase()
+	loadEnv()
+	loadDatabase()
 	seed.SeedDB()
 	serveApplication()
 }
 
 func loadDatabase() {
-    database.Connect()
-    database.Database.AutoMigrate(&models.Client{})
+	database.Connect()
+	database.Database.AutoMigrate(&models.Client{})
 	database.Database.AutoMigrate(&models.ClientText{})
 	database.Database.AutoMigrate(&models.Language{})
 	database.Database.AutoMigrate(&models.Text{})
@@ -31,21 +31,22 @@ func loadDatabase() {
 }
 
 func loadEnv() {
-    err := godotenv.Load(".env.local")
-    if err != nil {
-        log.Fatal("Error loading .env file")
-    }
+	err := godotenv.Load(".env.local")
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 }
 
 func serveApplication() {
-    router := gin.Default()
+	router := gin.Default()
 
 	config := cors.DefaultConfig()
+	config.AllowHeaders = []string{"Content-Type", "Authorization", "Access-Control-Allow-Origin"}
 	config.AllowOrigins = []string{"http://localhost:3000", "https://huawei-dev-challenge.web.app"}
 	router.Use(cors.New(config))
 
-    routes.GetRoutes(router)
+	routes.GetRoutes(router)
 
-    router.Run(":8000")
-    fmt.Println("Server running on port 8000")
+	router.Run(":8000")
+	fmt.Println("Server running on port 8000")
 }

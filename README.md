@@ -87,8 +87,67 @@ Request:
 }
 ```
 Response:
+Same as ```GET```
+
+```POST```
+```translations/multiple```
+Request:
 ```
 {
-  
+  "from": uint,
+  "to": uint,
+  "clientID": uint,
+  "queries": []string
+}
+```
+Response:
+```
+{
+  translations: [
+    {
+      "id": uint,
+      "content": string,
+      "languageID": uint
+    } ...
+  ]
+}
+```
+
+```/texts```
+
+```GET```
+```texts/by_client?client={clientID}&language={languageID}```
+Response:
+```
+{
+  "texts": [
+    {
+      "id": string,
+      "content": string,
+      "languageID": uint,
+    }  
+  ]
+}
+```
+
+```POST```
+```texts```
+Request:
+```
+{
+  "languageID": uint,
+  "clientID": uint,
+  "content": string,
+}
+```
+
+Response:
+```
+{
+  "text": {
+    "id": uint
+    "content": string
+    "languageID": uint
+  }
 }
 ```

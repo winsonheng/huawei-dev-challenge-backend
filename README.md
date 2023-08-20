@@ -7,7 +7,7 @@ backend for translate app
 - postgres DB: see https://www.postgresql.org/
 
 # Setting up database
-1. run ```createdb -h <DB_HOSTNAME> -p <DB_PORT> -U <DB_USER> diary_app --password```
+1. run ```createdb -h <DB_HOSTNAME> -p <DB_PORT> -U <DB_USER> <DB_NAME> --password```
 2. create a .env.local file and copy contents of .env over. Replace fields accordingly
 
 # Starting the server

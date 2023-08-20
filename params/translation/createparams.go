@@ -2,7 +2,7 @@ package translation
 
 import "backend/models"
 
-type CreateParams struct {
+type singleParam struct {
 	SourceTextContent     string `json:"text"`
 	SourceLanguageID      uint `json:"sourceLanguageID"`
 	TranslatedTextContent string `json:"translation"`
@@ -10,16 +10,30 @@ type CreateParams struct {
 	ClientID              uint   `json:"clientID"`
 }
 
-func ToModel(params *CreateParams) (*models.Text, *models.Text, uint) {
-	sourceText := models.Text{
-		Content: params.SourceTextContent,
-		LanguageID: params.SourceLanguageID,
-	}
+type CreateParams struct {
+	Translations []singleParam `json:"translations"`
+}
 
-	translatedText := models.Text{
-		Content: params.TranslatedTextContent,
-		LanguageID: params.TranslatedLanguageID,
-	}
+func ToModel(params *CreateParams) ([]models.Text, []models.Text, []uint) {
+	sourceTexts := make([]models.Text, len(params.Translations))
+	translatedTexts := make([]models.Text, len(params.Translations))
+	clientIDs := make([]uint, len(params.Translations))
+	for i, param := range params.Translations {
+		sourceText := models.Text{
+			Content: param.SourceTextContent,
+			LanguageID: param.SourceLanguageID,
+		}
+		sourceTexts[i] = sourceText
+	
+		translatedText := models.Text{
+			Content: param.TranslatedTextContent,
+			LanguageID: param.TranslatedLanguageID,
+		}
+		translatedTexts[i] = translatedText
 
-	return &sourceText, &translatedText, params.ClientID
+		clientIDs[i] = param.ClientID
+	}
+	
+
+	return sourceTexts, translatedTexts, clientIDs
 }

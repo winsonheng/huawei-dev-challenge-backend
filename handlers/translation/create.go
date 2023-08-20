@@ -2,6 +2,7 @@ package translation
 
 import (
 	"backend/dataaccess/translations"
+	"backend/models"
 	"backend/params/translation"
 	"net/http"
 
@@ -16,14 +17,20 @@ func HandleCreate(context *gin.Context) {
 		return
 	}
 
-	sourceText, translatedText, clientID := translation.ToModel(&createParams)
+	sourceTexts, translatedTexts, clientIDs := translation.ToModel(&createParams)
 
-	translation, err := translations.Create(sourceText, translatedText, clientID)
+	translationList := make([]*models.Translation, len(sourceTexts))
 
-	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
+	for i := range sourceTexts {
+		translation, err := translations.Create(&sourceTexts[i], &translatedTexts[i], clientIDs[i])
+
+		if err != nil {
+			context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		translationList[i] = translation
 	}
 
-	context.JSON(http.StatusCreated, gin.H{"translation": translation})
+	context.JSON(http.StatusCreated, gin.H{"translations": translationList})
 }
